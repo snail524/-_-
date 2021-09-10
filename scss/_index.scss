@@ -1,0 +1,186 @@
+.wrap{
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.header {
+    .banner{
+        position: relative;
+        margin-bottom: 133px;
+        h1{
+            background-image: url(../img/Hero.png);
+            @include hide-text;
+            height: 380px;
+        }
+        h2{
+            font-size: 36px;
+            color: white;
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        select{
+            width: 450px;
+            padding: 15px 11px;
+            background: white;
+            opacity: 0.7;
+            // outline: red 1px solid;
+            border: solid 3px white;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .populer{
+        padding: 20px 26px;
+        background: white;
+        width: 800px;
+        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 105%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        ul{
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+            li{
+                color: white;
+                width: 130px;
+                height: 42px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .purple{
+                color: #8A82CC;
+            }
+            .orange{
+                color: #FFA782;
+            }
+        }
+    }
+    .line{
+        position: relative;
+        height: 3px;
+        margin-bottom: 65px;
+        .icon{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #569AC8;
+            background: white;
+        }
+    }
+}
+
+.content{
+    h2{
+        text-align: center;
+        color: #8A82CC;
+        margin-bottom: 24px;
+    }
+    .list{
+        display: flex;
+        flex-wrap: wrap;
+        // width: 100%;
+        justify-content: space-between;
+        &-li{
+            margin-right: 1%;
+            width: 49%;
+            margin-bottom: 1rem;
+            // flex-wrap: wrap;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+
+            .img{
+                position: relative;
+                img{
+                    max-width: 100%;
+                    height: 155px;
+                    background-position: center;
+                    object-fit: cover;
+                    
+                }
+                h5,p{
+                    color: white;
+                    position: absolute;
+                    bottom: 5%;
+                    margin: 0;
+                }
+                h5{
+                    left: 5%;
+                    font-size: 28px;
+                }
+                p{
+                    right: 5%;
+                }
+            }
+            
+        }
+        .detail{
+            padding: 15px 24px;
+            li{
+                display: flex;
+                margin-bottom: 13px;
+                
+            }
+        }
+        .detail{
+            p, span{
+                display: inline-block;
+                margin: 0;
+                line-height: 18px;
+                font-size: 18px;
+            }
+            p{
+                width: 85%;
+            }
+            .icon{
+               
+                @include hide-text;
+                background-repeat: no-repeat;
+                width: 18px;
+                height: 18px;
+                margin-right: 9px;
+                &-clock{
+                    background-image: url(../img/icons_clock.png);
+                }
+                &-place{
+                    background-image: url(../img/icons_pin.png);
+                }
+                &-phone{
+                    background-image: url(../img/icons_phone.png);
+                }
+                &-ticket{
+                    background-image: url(../img/icons_tag.png);
+                    position: absolute;
+                    right: 15%;
+                }
+            }
+            .ticket{
+                position: relative;
+                margin: 0;
+                .cost{
+                    position: absolute;
+                    right: 0%;
+                }
+            }
+        }
+    }
+}
+
+
+.footer{
+    padding: 24px;
+    background: #569AC8;
+    text-align: center;
+    color: white;
+}
+
+.red{
+    color: red;
+}
