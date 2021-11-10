@@ -73,194 +73,75 @@ function pages_indicate(item){
     page_num =Math.ceil(item.length / 6) ;
     // console.log(page_num)
     for(var i=0 ; i<page_num ; i++){
-        page_content +='<li class="page-item"><a class="page-link" href="#">' + (i+1)+'</a></li>' ;
+        page_content +='<li class="page-item"><a class="page-link" href="#" data-num='+(i+1)+'>' + (i+1)+'</a></li>' ;
     }
     
     // console.log(page_content);
-    page_layout_first='<li class="page-item"><a class="page-link" href="#" data-num="0" >＜ prev</a></li>';  
-    page_layout_end='<li class="page-item"><a class="page-link" href="#" data-num="1">next ＞</a></li>';
+    page_layout_first='<li class="page-item"><a class="page-link" href="#" data-num="-" >＜ prev</a></li>';  
+    page_layout_end='<li class="page-item"><a class="page-link" href="#" data-num="+">next ＞</a></li>';
     
     page.innerHTML = page_layout_first+page_content +page_layout_end;
     
     
 }
+// 頁面
 var page_now = 0;
 
+// 預設第一頁
 function list_initial(){
     page_now = 1;
     var el = document.querySelectorAll('.list-li');
     ;
     
-    // console.log(el.length);
     if (el.length>6){
     for (var i=6;i<el.length;i++){
         el[i].setAttribute('style','display: none')
     }}
 }
-
+// 判斷按下哪一頁
 function pagelist(e){
     var el = document.querySelectorAll('.list-li');
-    ;
-    if(e.target.textContent==1){
-        page_1(el);
-    }
-    else if(e.target.textContent==2){
-        page_2(el);
-    }
-    else if(e.target.textContent==3){
-        page_3(el);
-    }
-    else if(e.target.textContent==4){
-        page_4(el);
-    }
-    else if(e.target.textContent==5){
-        page_5(el);
-    }
-
-    if(e.target.dataset.num=="0"){
-        console.log(page_now-1);
-        switch(page_now -1){
-            case 1:
-                page_1(el);
-                page_now=1;
-                break;
-            case 2:
-                page_2(el);
-                page_now=2;
-                break;
-            case 3:
-                page_3(el);
-                page_now=3;
-                break;
-            case 4:
-                page_4(el);
-                page_now=4;
-                break;
-            case 5:
-                page_5(el);
-                page_now=5;
-                break;
+    if(e.target.dataset.num=="-"){
+        if(page_now-1 ==0){
+            console.log('在最前面了');
+            return
         }
-
-     }
-     else if(e.target.dataset.num=="1"){
-        page_max = (Math.ceil(el.length/6));
-        if (page_now+1 > page_max){
-            return;
+        console.log(page_now,'過去')
+        pageTest(page_now-1);
+        console.log(page_now,'現在')
+    }else if(e.target.dataset.num=="+"){
+        if(page_now+1 > Math.ceil(el.length/6)){
+            console.log('在最後面了');
+            return
         }
-        switch(page_now +1){
-            case 1:
-                page_1(el);
-                page_now=1;
-                break;
-            case 2:
-                page_2(el);
-                page_now=2;
-                break;
-            case 3:
-                page_3(el);
-                page_now=3;
-                break;
-            case 4:
-                page_4(el);
-                page_now=4;
-                break;
-            case 5:
-                page_5(el);
-                page_now=5;
-                break;
-        }
+        console.log(page_now,'過去')
+        pageTest(page_now+1);
+        console.log(page_now,'現在')
 
-     }
+    }else{
+        pageTest(e.target.dataset.num);
+    }
+    
 }
+// 頁面顯示
+function pageTest(n){
+    page_now =  parseInt(n);
+    console.log("nowpage",page_now);
 
-function page_1(el_1){
-    console.log(1);
-    page_now = 1;
-    for (var i=6;i<el_1.length;i++){
-        el_1[i].setAttribute('style','display: none')
+    var el = document.querySelectorAll('.list-li');
+    for (var i=0;i<el.length;i++){
+        el[i].setAttribute('style','display: none')
     }
-    for (var i=0;i<6;i++){
-        el_1[i].setAttribute('style','display: block')
-    }
-}
-
-function page_2(el_2){
-    page_now =2 ;
-    if(el_2.length <13){
-        for (var i=0;i<6;i++){
-            el_2[i].setAttribute('style','display: none')
-        }
-        for (var i=6;i<el_2.length ;i++){
-            el_2[i].setAttribute('style','display: block')
+    if(el.length/6 >= n){
+        for (var i=(6*n-6); i<6*n ;i++){
+            el[i].setAttribute('style','display: block')
         }
     }else{
-        for (var i=0;i<el_2.length;i++){
-            el_2[i].setAttribute('style','display: none')
-        }
-        for (var i=6;i<12 ;i++){
-            el_2[i].setAttribute('style','display: block')
-        }
-    }
-}
-
-function page_3(el_3){
-
-    console.log(3);
-    page_now = 3;
-    if(el_3.length <19){
-        for (var i=0;i<12;i++){
-            el_3[i].setAttribute('style','display: none')
-        }
-        for (var i=12;i<el_3.length ;i++){
-            el_3[i].setAttribute('style','display: block')
-        }
-    }else{
-        for (var i=0;i<el_3.length;i++){
-            el_3[i].setAttribute('style','display: none')
-        }
-        for (var i=12;i<18 ;i++){
-            el_3[i].setAttribute('style','display: block')
-        }
-    }
-}
-function page_4(el_4){
-    console.log(4);
-    page_now = 4;
-    if(el_4.length <25){
-        for (var i=0;i<18;i++){
-            el_4[i].setAttribute('style','display: none')
-        }
-        for (var i=18;i<el_4.length ;i++){
-            el_4[i].setAttribute('style','display: block')
-        }
-    }else{
-        for (var i=0;i<el_4.length;i++){
-            el_4[i].setAttribute('style','display: none')
-        }
-        for (var i=18;i<24 ;i++){
-            el_4[i].setAttribute('style','display: block')
+        // console.log(Math.floor (el.length/6));
+        let pageEnd = Math.floor (el.length/6);
+        for (var i=(pageEnd * 6 ); i<el.length ;i++){
+            el[i].setAttribute('style','display: block')
         }
     }
 }
 
-function page_5(el_5){
-
-    console.log(5);
-    page_now = 5;
-    if(el_5.length <31){
-        for (var i=0;i<24;i++){
-            el_5[i].setAttribute('style','display: none')
-        }
-        for (var i=24;i<el_5.length ;i++){
-            el_5[i].setAttribute('style','display: block')
-        }
-    }else{
-        for (var i=0;i<el_5.length;i++){
-            el_5[i].setAttribute('style','display: none')
-        }
-        for (var i=24;i<30 ;i++){
-            el_5[i].setAttribute('style','display: block')
-        }
-    }
-}
