@@ -1,6 +1,34 @@
 
-simple_data = data.data.XML_Head.Infos.Info;
+// simple_data = data.data.XML_Head.Infos.Info;
 // console.log(simple_data.length);
+
+// var data2;
+
+var xhr = new XMLHttpRequest();
+var data ;
+var  simple_data ;
+xhr.open('get','https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json',true);
+
+// true 非同步，不會等資料傳就會直接往下進行
+// false 會等資料傳回來再進行，但可能會造成網頁有卡頓效果，因而不常用
+xhr.send(null);  
+
+xhr.onload = function(){     //會等資料跑出來再進行
+  // console.log(xhr.responseText);
+  if(xhr.status ==200){  // 判斷是否有傳道
+     data = JSON.parse(xhr.responseText);
+    // console.log('ss',data.result.records);
+     simple_data  = data.result.records;
+    console.log(simple_data);
+    len = simple_data.length;
+
+  }
+  else{
+    console.log('error data');
+  }
+}
+// console.log('ss',data.result.records);
+//var simple_data  = data.result.records;
 
 var area = document.getElementById('areaId');
 var list = document.querySelector('.list');
@@ -11,16 +39,17 @@ var page = document.querySelector('.page nav ul');
 area.addEventListener('change',selectArea);
 box.addEventListener('click',checklist);
 page.addEventListener('click',pagelist);
-len = simple_data.length;
+// len = simple_data.length;
 var areadate = [];
 function selectArea(e){
-
+    console.log(simple_data);
     areadate = [];
     var select = e.target.value;
     h2.innerHTML = select;
     // console.log(select);
     for(i=0;i<len;i++){
-        if (select ==  (simple_data[i].Add.slice(6,9 ))){
+        if (select ==  (simple_data[i].Zone)){
+        // if (select ==  (simple_data[i].Add.slice(6,9 ))){
             areadate.push(simple_data[i]);
         };
         
@@ -37,7 +66,9 @@ function checklist(e){
     }
     h2.innerHTML = e.target.textContent;
     for(i=0;i<len;i++){
-        if (e.target.textContent ==  (simple_data[i].Add.slice(6,9 ))){
+        //if (e.target.textContent ==  (simple_data[i].Add.slice(6,9 ))){
+        if (e.target.textContent ==  (simple_data[i].Zone)){
+
             areadate.push(simple_data[i]);
         };
     };
